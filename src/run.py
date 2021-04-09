@@ -1,4 +1,5 @@
 
-from QuoteEngine import DocxIngestor
+from QuoteEngine import Ingestor
 
-print(DocxIngestor.parse('./_data/SimpleLines/SimpleLines.docx'))
+print(Ingestor.parse('./_data/SimpleLines/SimpleLines.docx'))
+print(Ingestor.parse('./_data/SimpleLines/SimpleLines.csv'))
