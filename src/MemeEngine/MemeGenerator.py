@@ -1,9 +1,16 @@
 from PIL import Image, ImageDraw, ImageFont
 from random import randint
+import os
 
 class MemeGenerator:
     def __init__(self, output_dir):
         self.output_dir = output_dir
+        try:
+            os.mkdir(output_dir)
+        except OSError:
+            print ("Creation of the directory %s failed" % output_dir)
+        else:
+            print ("Successfully created the directory %s " % output_dir)
 
     def make_meme(self, img_path, text, author, width=500) -> str:
         """Create a meme With a Text
