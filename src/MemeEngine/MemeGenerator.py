@@ -8,9 +8,9 @@ class MemeGenerator:
         try:
             os.mkdir(output_dir)
         except OSError:
-            print ("Creation of the directory %s failed" % output_dir)
+            print("Creation of the directory %s failed, maybe was already present" % output_dir)
         else:
-            print ("Successfully created the directory %s " % output_dir)
+            print("Successfully created the directory %s " % output_dir)
 
     def make_meme(self, img_path, text, author, width=500) -> str:
         """Create a meme With a Text
@@ -32,7 +32,7 @@ class MemeGenerator:
         if text is not None and author is not None:
             draw = ImageDraw.Draw(img)
             font = ImageFont.truetype(font='./_data/fonts/LilitaOne-Regular.ttf', size=20)
-            draw.text((randint(0,width), randint(0,height)), f'"{text}" - {author}', font=font, fill='white')
+            draw.text((randint(0,width-100), randint(0,height-300)), f'"{text}" - {author}', font=font, fill='white')
         
         out_path = self.output_dir + '/img' + str(randint(0, 1000000000)) + '.jpg'
         img.save(out_path)
