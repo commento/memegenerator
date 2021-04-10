@@ -1,3 +1,4 @@
+"""TxtIngestor module."""
 from typing import List
 import docx
 
@@ -6,10 +7,13 @@ from .QuoteModel import QuoteModel
 
 
 class TxtIngestor(IngestorInterface):
+    """Class TxtIngestor."""
+
     allowed_extensions = ['txt']
 
     @classmethod
     def parse(cls, path: str) -> List[QuoteModel]:
+        """Parse file txt in a list of QuoteModel."""
         if not cls.can_ingest(path):
             raise Exception('cannot ingest exception')
 

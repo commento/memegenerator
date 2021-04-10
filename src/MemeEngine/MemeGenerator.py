@@ -1,22 +1,30 @@
+"""MemeGenerator package."""
 from PIL import Image, ImageDraw, ImageFont
 from random import randint
 import os
 
+
 class MemeGenerator:
+    """MemeGenerator class for meme creation."""
+
     def __init__(self, output_dir):
+        """Instanciate a MemeGenerator."""
         self.output_dir = output_dir
         try:
             os.mkdir(output_dir)
         except OSError:
-            print("Creation of the directory %s failed, maybe was already present" % output_dir)
+            print("Creation of the directory %s failed, \
+                  maybe was already present" % output_dir)
         else:
             print("Successfully created the directory %s " % output_dir)
 
     def make_meme(self, img_path, text, author, width=500) -> str:
-        """Create a meme With a Text
+        """Create a meme With a Text.
 
         Arguments:
             img_path {str} -- the file location for the input image.
+            text {str} -- the text for the quote.
+            author {str} -- the fauthor for the quote.
             out_path {str} -- the desired location for the output image.
             width {int} -- The pixel width value. Default=None.
         Returns:
@@ -31,9 +39,14 @@ class MemeGenerator:
 
         if text is not None and author is not None:
             draw = ImageDraw.Draw(img)
-            font = ImageFont.truetype(font='./_data/fonts/LilitaOne-Regular.ttf', size=20)
-            draw.text((randint(0,width-100), randint(0,height-300)), f'"{text}" - {author}', font=font, fill='white')
-        
-        out_path = self.output_dir + '/img' + str(randint(0, 1000000000)) + '.jpg'
+            font = ImageFont.truetype(font='./_data/fonts/' +
+                                      'LilitaOne-Regular.ttf',
+                                      size=20)
+            draw.text((randint(0, width-100),
+                       randint(0, height-300)), f'"{text}" \
+                      - {author}', font=font, fill='white')
+
+        out_path = self.output_dir + '/img' + \
+            str(randint(0, 1000000000)) + '.jpg'
         img.save(out_path)
         return out_path

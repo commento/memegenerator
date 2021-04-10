@@ -1,3 +1,2 @@
-""" package for MemeEngine. """
-
+"""package for MemeEngine."""
 from .MemeGenerator import MemeGenerator
