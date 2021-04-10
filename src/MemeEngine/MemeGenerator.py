@@ -42,8 +42,8 @@ class MemeGenerator:
             font = ImageFont.truetype(font='./_data/fonts/' +
                                       'LilitaOne-Regular.ttf',
                                       size=20)
-            draw.text((randint(0, width-100),
-                       randint(0, height-300)), f'"{text}" \
+            draw.text((randint(0, abs(width-100)),
+                       randint(0, abs(height-400))), f'"{text}" \n \
                       - {author}', font=font, fill='white')
 
         out_path = self.output_dir + '/img' + \
