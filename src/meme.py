@@ -12,6 +12,8 @@ def generate_meme(path=None, body=None, author=None):
     img = None
     quote = None
 
+    meme = MemeGenerator('./tmp')
+
     if path is None:
         images = "./_data/photos/dog/"
         imgs = []
@@ -37,7 +39,7 @@ def generate_meme(path=None, body=None, author=None):
             raise Exception('Author Required if Body is Used')
         quote = QuoteModel(body, author)
 
-    meme = MemeGenerator('./tmp')
+
     path = meme.make_meme(img, quote.body, quote.author)
     return path
 

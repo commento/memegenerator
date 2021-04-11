@@ -41,6 +41,7 @@ def meme_rand():
     img = random.choice(imgs)
     quote = random.choice(quotes)
     path = meme.make_meme(img, quote.body, quote.author)
+
     return render_template('meme.html', path=path)
 
 
@@ -72,6 +73,8 @@ def meme_post():
     file.close()
 
     path = meme.make_meme("./tmp/img.jpg", body, author)
+    if path == False:
+        return abort(400)
 
     try:
         os.remove("./tmp/img.jpg")

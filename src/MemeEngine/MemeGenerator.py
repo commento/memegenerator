@@ -1,7 +1,8 @@
 """MemeGenerator package."""
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, UnidentifiedImageError
 from random import randint
 import os
+import textwrap
 
 
 class MemeGenerator:
@@ -30,8 +31,11 @@ class MemeGenerator:
         Returns:
             str -- the file path to the output image.
         """
-        img = Image.open(img_path)
-
+        try:
+            img = Image.open(img_path)
+        except UnidentifiedImageError:
+            print("make_meme cannot open image")
+            return False
         if width is not None:
             ratio = width/float(img.size[0])
             height = int(ratio*float(img.size[1]))
@@ -42,9 +46,19 @@ class MemeGenerator:
             font = ImageFont.truetype(font='./_data/fonts/' +
                                       'LilitaOne-Regular.ttf',
                                       size=20)
-            draw.text((randint(0, abs(width-100)),
-                       randint(0, abs(height-400))), f'"{text}" \n \
-                      - {author}', font=font, fill='white')
+            text = f'"{text}" - \n {author}'
+            if len(text) > 30:
+                lines = textwrap.wrap(text, width=40)
+                y_text = 20
+                for line in lines:
+                    width, height = font.getsize(line)
+                    draw.text((30, y_text), line,
+                              font=font, fill='white')
+                    y_text += height
+            else:
+                draw.text((randint(0, abs(width-200)),
+                          randint(0, abs(height-100))),
+                          text, font=font, fill='white')
 
         out_path = self.output_dir + '/img' + \
             str(randint(0, 1000000000)) + '.jpg'

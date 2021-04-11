@@ -21,8 +21,10 @@ class PDFIngestor(IngestorInterface):
 
         tmp = f'./tmp/{random.randint(0,1000000)}.txt'
         call = subprocess.call(['pdftotext', path, tmp])
-
-        file_ref = open(tmp, "r")
+        try:
+            file_ref = open(tmp, "r")
+        except FileNotFoundError:
+            print("PDFIngestor file not found")
         quotes = []
         for line in file_ref.readlines():
             line = line.strip('\n\r').strip()
