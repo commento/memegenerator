@@ -49,16 +49,20 @@ class MemeGenerator:
             text = f'"{text}" - \n {author}'
             if len(text) > 30:
                 lines = textwrap.wrap(text, width=40)
-                y_text = 20
+                y_text = 100
                 for line in lines:
                     width, height = font.getsize(line)
                     draw.text((30, y_text), line,
-                              font=font, fill='white')
+                              font=font, fill='white',
+                              stroke_width=1,
+                              stroke_fill='black')
                     y_text += height
             else:
                 draw.text((randint(0, abs(width-200)),
                           randint(0, abs(height-100))),
-                          text, font=font, fill='white')
+                          text, font=font, fill='white',
+                          stroke_width=1,
+                          stroke_fill='black')
 
         out_path = self.output_dir + '/img' + \
             str(randint(0, 1000000000)) + '.jpg'
